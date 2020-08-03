@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="activosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activos">
+          <Key>
+            <PropertyRef Name="ActivoID" />
+          </Key>
+          <Property Name="ActivoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroSerie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Modelo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCompra" Type="date" Nullable="false" />
+          <Property Name="FechaVencimientoSeguro" Type="date" Nullable="false" />
+          <Property Name="FechaVencimientoGarantia" Type="date" Nullable="false" />
+          <Property Name="CostoColones" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CostoDolares" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CondicionActivo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FotoFactura" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="FotoActivo" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="Marca" Type="int" Nullable="false" />
+          <Property Name="Vendedor" Type="int" Nullable="false" />
+          <Property Name="Asegurador" Type="int" Nullable="false" />
+          <Property Name="TipoActivo" Type="int" Nullable="false" />
+          <Property Name="ValorActual" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Asegurador">
+          <Key>
+            <PropertyRef Name="AseguradorID" />
+          </Key>
+          <Property Name="AseguradorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Depreciacion">
+          <Key>
+            <PropertyRef Name="DepreciacionID" />
+          </Key>
+          <Property Name="DepreciacionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Valor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="int" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="MarcaID" />
+          </Key>
+          <Property Name="MarcaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoActivo">
+          <Key>
+            <PropertyRef Name="TipoActivoID" />
+          </Key>
+          <Property Name="TipoActivoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="UsuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendedor">
+          <Key>
+            <PropertyRef Name="VendedorID" />
+          </Key>
+          <Property Name="VendedorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CedulaJuridica" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefonos" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NombreContacto" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ACTIVO">
+          <End Role="Activos" Type="Self.Activos" Multiplicity="0..1" />
+          <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activos">
+              <PropertyRef Name="ActivoID" />
+            </Principal>
+            <Dependent Role="Depreciacion">
+              <PropertyRef Name="Activo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASEGURADOR">
+          <End Role="Asegurador" Type="Self.Asegurador" Multiplicity="1" />
+          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asegurador">
+              <PropertyRef Name="AseguradorID" />
+            </Principal>
+            <Dependent Role="Activos">
+              <PropertyRef Name="Asegurador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPRECIACION">
+          <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="1" />
+          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depreciacion">
+              <PropertyRef Name="DepreciacionID" />
+            </Principal>
+            <Dependent Role="Activos">
+              <PropertyRef Name="ValorActual" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MARCA">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="MarcaID" />
+            </Principal>
+            <Dependent Role="Activos">
+              <PropertyRef Name="Marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_ACTIVO">
+          <End Role="TipoActivo" Type="Self.TipoActivo" Multiplicity="1" />
+          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoActivo">
+              <PropertyRef Name="TipoActivoID" />
+            </Principal>
+            <Dependent Role="Activos">
+              <PropertyRef Name="TipoActivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDEDOR">
+          <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="1" />
+          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedor">
+              <PropertyRef Name="VendedorID" />
+            </Principal>
+            <Dependent Role="Activos">
+              <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="activosModelStoreContainer">
+          <EntitySet Name="Activos" EntityType="Self.Activos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asegurador" EntityType="Self.Asegurador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Depreciacion" EntityType="Self.Depreciacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoActivo" EntityType="Self.TipoActivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ACTIVO" Association="Self.FK_ACTIVO">
+            <End Role="Activos" EntitySet="Activos" />
+            <End Role="Depreciacion" EntitySet="Depreciacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASEGURADOR" Association="Self.FK_ASEGURADOR">
+            <End Role="Asegurador" EntitySet="Asegurador" />
+            <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPRECIACION" Association="Self.FK_DEPRECIACION">
+            <End Role="Depreciacion" EntitySet="Depreciacion" />
+            <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MARCA" Association="Self.FK_MARCA">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_ACTIVO" Association="Self.FK_TIPO_ACTIVO">
+            <End Role="TipoActivo" EntitySet="TipoActivo" />
+            <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDEDOR" Association="Self.FK_VENDEDOR">
+            <End Role="Vendedor" EntitySet="Vendedor" />
+            <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="activosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activos">
+          <Key>
+            <PropertyRef Name="ActivoID" />
+          </Key>
+          <Property Name="ActivoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroSerie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaCompra" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaVencimientoSeguro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaVencimientoGarantia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CostoColones" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CostoDolares" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CondicionActivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FotoFactura" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="FotoActivo" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="Marca" Type="Int32" Nullable="false" />
+          <Property Name="Vendedor" Type="Int32" Nullable="false" />
+          <Property Name="Asegurador" Type="Int32" Nullable="false" />
+          <Property Name="TipoActivo" Type="Int32" Nullable="false" />
+          <Property Name="ValorActual" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Depreciacion" Relationship="Self.FK_ACTIVO" FromRole="Activos" ToRole="Depreciacion" />
+          <NavigationProperty Name="Asegurador1" Relationship="Self.FK_ASEGURADOR" FromRole="Activos" ToRole="Asegurador" />
+          <NavigationProperty Name="Depreciacion1" Relationship="Self.FK_DEPRECIACION" FromRole="Activos" ToRole="Depreciacion" />
+          <NavigationProperty Name="Marca1" Relationship="Self.FK_MARCA" FromRole="Activos" ToRole="Marca" />
+          <NavigationProperty Name="TipoActivo1" Relationship="Self.FK_TIPO_ACTIVO" FromRole="Activos" ToRole="TipoActivo" />
+          <NavigationProperty Name="Vendedor1" Relationship="Self.FK_VENDEDOR" FromRole="Activos" ToRole="Vendedor" />
+        </EntityType>
+        <EntityType Name="Asegurador">
+          <Key>
+            <PropertyRef Name="AseguradorID" />
+          </Key>
+          <Property Name="AseguradorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Activos" Relationship="Self.FK_ASEGURADOR" FromRole="Asegurador" ToRole="Activos" />
+        </EntityType>
+        <EntityType Name="Depreciacion">
+          <Key>
+            <PropertyRef Name="DepreciacionID" />
+          </Key>
+          <Property Name="DepreciacionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Valor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Activo" Type="Int32" />
+          <NavigationProperty Name="Activos" Relationship="Self.FK_ACTIVO" FromRole="Depreciacion" ToRole="Activos" />
+          <NavigationProperty Name="Activos1" Relationship="Self.FK_DEPRECIACION" FromRole="Depreciacion" ToRole="Activos" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="MarcaID" />
+          </Key>
+          <Property Name="MarcaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Activos" Relationship="Self.FK_MARCA" FromRole="Marca" ToRole="Activos" />
+        </EntityType>
+        <EntityType Name="TipoActivo">
+          <Key>
+            <PropertyRef Name="TipoActivoID" />
+          </Key>
+          <Property Name="TipoActivoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Activos" Relationship="Self.FK_TIPO_ACTIVO" FromRole="TipoActivo" ToRole="Activos" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendedor">
+          <Key>
+            <PropertyRef Name="VendedorID" />
+          </Key>
+          <Property Name="VendedorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CedulaJuridica" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefonos" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreContacto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Activos" Relationship="Self.FK_VENDEDOR" FromRole="Vendedor" ToRole="Activos" />
+        </EntityType>
+        <Association Name="FK_ACTIVO">
+          <End Role="Activos" Type="Self.Activos" Multiplicity="0..1" />
+          <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activos">
+              <PropertyRef Name="ActivoID" />
+            </Principal>
+            <Dependent Role="Depreciacion">
+              <PropertyRef Name="Activo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASEGURADOR">
+          <End Role="Asegurador" Type="Self.Asegurador" Multiplicity="1" />
+          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asegurador">
+              <PropertyRef Name="AseguradorID" />
+            </Principal>
+            <Dependent Role="Activos">
+              <PropertyRef Name="Asegurador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPRECIACION">
+          <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="1" />
+          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depreciacion">
+              <PropertyRef Name="DepreciacionID" />
+            </Principal>
+            <Dependent Role="Activos">
+              <PropertyRef Name="ValorActual" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MARCA">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="MarcaID" />
+            </Principal>
+            <Dependent Role="Activos">
+              <PropertyRef Name="Marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_ACTIVO">
+          <End Role="TipoActivo" Type="Self.TipoActivo" Multiplicity="1" />
+          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoActivo">
+              <PropertyRef Name="TipoActivoID" />
+            </Principal>
+            <Dependent Role="Activos">
+              <PropertyRef Name="TipoActivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDEDOR">
+          <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="1" />
+          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedor">
+              <PropertyRef Name="VendedorID" />
+            </Principal>
+            <Dependent Role="Activos">
+              <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="activosEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activos" EntityType="Self.Activos" />
+          <EntitySet Name="Asegurador" EntityType="Self.Asegurador" />
+          <EntitySet Name="Depreciacion" EntityType="Self.Depreciacion" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" />
+          <EntitySet Name="TipoActivo" EntityType="Self.TipoActivo" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Vendedor" EntityType="Self.Vendedor" />
+          <AssociationSet Name="FK_ACTIVO" Association="Self.FK_ACTIVO">
+            <End Role="Activos" EntitySet="Activos" />
+            <End Role="Depreciacion" EntitySet="Depreciacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASEGURADOR" Association="Self.FK_ASEGURADOR">
+            <End Role="Asegurador" EntitySet="Asegurador" />
+            <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPRECIACION" Association="Self.FK_DEPRECIACION">
+            <End Role="Depreciacion" EntitySet="Depreciacion" />
+            <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MARCA" Association="Self.FK_MARCA">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_ACTIVO" Association="Self.FK_TIPO_ACTIVO">
+            <End Role="TipoActivo" EntitySet="TipoActivo" />
+            <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDEDOR" Association="Self.FK_VENDEDOR">
+            <End Role="Vendedor" EntitySet="Vendedor" />
+            <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="activosModelStoreContainer" CdmEntityContainer="activosEntities1">
+          <EntitySetMapping Name="Activos">
+            <EntityTypeMapping TypeName="activosModel.Activos">
+              <MappingFragment StoreEntitySet="Activos">
+                <ScalarProperty Name="ActivoID" ColumnName="ActivoID" />
+                <ScalarProperty Name="NumeroSerie" ColumnName="NumeroSerie" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="FechaVencimientoSeguro" ColumnName="FechaVencimientoSeguro" />
+                <ScalarProperty Name="FechaVencimientoGarantia" ColumnName="FechaVencimientoGarantia" />
+                <ScalarProperty Name="CostoColones" ColumnName="CostoColones" />
+                <ScalarProperty Name="CostoDolares" ColumnName="CostoDolares" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CondicionActivo" ColumnName="CondicionActivo" />
+                <ScalarProperty Name="FotoFactura" ColumnName="FotoFactura" />
+                <ScalarProperty Name="FotoActivo" ColumnName="FotoActivo" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="Asegurador" ColumnName="Asegurador" />
+                <ScalarProperty Name="TipoActivo" ColumnName="TipoActivo" />
+                <ScalarProperty Name="ValorActual" ColumnName="ValorActual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asegurador">
+            <EntityTypeMapping TypeName="activosModel.Asegurador">
+              <MappingFragment StoreEntitySet="Asegurador">
+                <ScalarProperty Name="AseguradorID" ColumnName="AseguradorID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Depreciacion">
+            <EntityTypeMapping TypeName="activosModel.Depreciacion">
+              <MappingFragment StoreEntitySet="Depreciacion">
+                <ScalarProperty Name="DepreciacionID" ColumnName="DepreciacionID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marca">
+            <EntityTypeMapping TypeName="activosModel.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoActivo">
+            <EntityTypeMapping TypeName="activosModel.TipoActivo">
+              <MappingFragment StoreEntitySet="TipoActivo">
+                <ScalarProperty Name="TipoActivoID" ColumnName="TipoActivoID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="activosModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendedor">
+            <EntityTypeMapping TypeName="activosModel.Vendedor">
+              <MappingFragment StoreEntitySet="Vendedor">
+                <ScalarProperty Name="VendedorID" ColumnName="VendedorID" />
+                <ScalarProperty Name="CedulaJuridica" ColumnName="CedulaJuridica" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
