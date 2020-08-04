@@ -16,7 +16,7 @@ namespace Infrastructure.Models
     public partial class MyContext : DbContext
     {
         public MyContext()
-            : base("name=activosEntities")
+            : base("name=activosEntities2")
         {
         }
     
@@ -30,7 +30,7 @@ namespace Infrastructure.Models
         public virtual DbSet<Depreciacion> Depreciacion { get; set; }
         public virtual DbSet<Marca> Marca { get; set; }
         public virtual DbSet<TipoActivo> TipoActivo { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Vendedor> Vendedor { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

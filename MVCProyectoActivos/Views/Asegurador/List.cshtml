@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Infrastructure.Models.Asegurador>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AseguradorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.AseguradorID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Descripcion)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.AseguradorID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.AseguradorID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.AseguradorID })
+    </td>
+</tr>
+}
+
+</table>

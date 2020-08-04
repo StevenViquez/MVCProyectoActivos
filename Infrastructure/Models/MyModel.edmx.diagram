@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="23a5a13516844f349749959ba7b347cd" Name="Diagram1">
+      <Diagram DiagramId="820b4783db6e4638b231082c86cfa58d" Name="Diagram1">
         <EntityTypeShape EntityType="activosModel.Activos" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="activosModel.Asegurador" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="activosModel.Depreciacion" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="activosModel.Marca" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="activosModel.TipoActivo" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="activosModel.Usuario" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="activosModel.Vendedor" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="activosModel.Usuario" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
         <AssociationConnector Association="activosModel.FK_ACTIVO" ManuallyRouted="false" />
         <AssociationConnector Association="activosModel.FK_ASEGURADOR" ManuallyRouted="false" />
         <AssociationConnector Association="activosModel.FK_DEPRECIACION" ManuallyRouted="false" />

@@ -15,6 +15,7 @@ namespace Infrastructure.Models
     public partial class Usuario
     {
         public int UsuarioID { get; set; }
+        public string Usuario1 { get; set; }
         public string Contrasena { get; set; }
         public string TipoUsuario { get; set; }
     }

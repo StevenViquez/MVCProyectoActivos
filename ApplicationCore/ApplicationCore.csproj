@@ -42,10 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IServiceAsegurador.cs" />
+    <Compile Include="Services\IServiceMarca.cs" />
+    <Compile Include="Services\IServiceTipoActivo.cs" />
+    <Compile Include="Services\IServiceUsuario.cs" />
+    <Compile Include="Services\IServiceVendedor.cs" />
+    <Compile Include="Services\ServiceAsegurador.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">

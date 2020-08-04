@@ -25,7 +25,7 @@
           <Property Name="Vendedor" Type="int" Nullable="false" />
           <Property Name="Asegurador" Type="int" Nullable="false" />
           <Property Name="TipoActivo" Type="int" Nullable="false" />
-          <Property Name="ValorActual" Type="int" Nullable="false" />
+          <Property Name="ValorActual" Type="int" />
         </EntityType>
         <EntityType Name="Asegurador">
           <Key>
@@ -57,11 +57,17 @@
           <Property Name="TipoActivoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'activos.dbo.Usuario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="UsuarioID" />
+            <PropertyRef Name="Usuario" />
+            <PropertyRef Name="Contrasena" />
+            <PropertyRef Name="TipoUsuario" />
           </Key>
           <Property Name="UsuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Contrasena" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TipoUsuario" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -101,7 +107,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DEPRECIACION">
-          <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="1" />
+          <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="0..1" />
           <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Depreciacion">
@@ -154,8 +160,15 @@
           <EntitySet Name="Depreciacion" EntityType="Self.Depreciacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoActivo" EntityType="Self.TipoActivo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Usuario].[UsuarioID] AS [UsuarioID], 
+    [Usuario].[Usuario] AS [Usuario], 
+    [Usuario].[Contrasena] AS [Contrasena], 
+    [Usuario].[TipoUsuario] AS [TipoUsuario]
+    FROM [dbo].[Usuario] AS [Usuario]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_ACTIVO" Association="Self.FK_ACTIVO">
             <End Role="Activos" EntitySet="Activos" />
             <End Role="Depreciacion" EntitySet="Depreciacion" />
@@ -206,7 +219,7 @@
           <Property Name="Vendedor" Type="Int32" Nullable="false" />
           <Property Name="Asegurador" Type="Int32" Nullable="false" />
           <Property Name="TipoActivo" Type="Int32" Nullable="false" />
-          <Property Name="ValorActual" Type="Int32" Nullable="false" />
+          <Property Name="ValorActual" Type="Int32" />
           <NavigationProperty Name="Depreciacion" Relationship="Self.FK_ACTIVO" FromRole="Activos" ToRole="Depreciacion" />
           <NavigationProperty Name="Asegurador1" Relationship="Self.FK_ASEGURADOR" FromRole="Activos" ToRole="Asegurador" />
           <NavigationProperty Name="Depreciacion1" Relationship="Self.FK_DEPRECIACION" FromRole="Activos" ToRole="Depreciacion" />
@@ -249,14 +262,6 @@
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Activos" Relationship="Self.FK_TIPO_ACTIVO" FromRole="TipoActivo" ToRole="Activos" />
         </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="UsuarioID" />
-          </Key>
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TipoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="Vendedor">
           <Key>
             <PropertyRef Name="VendedorID" />
@@ -268,6 +273,18 @@
           <Property Name="CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NombreContacto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Activos" Relationship="Self.FK_VENDEDOR" FromRole="Vendedor" ToRole="Activos" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+            <PropertyRef Name="Usuario1" />
+            <PropertyRef Name="Contrasena" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <Association Name="FK_ACTIVO">
           <End Role="Activos" Type="Self.Activos" Multiplicity="0..1" />
@@ -294,7 +311,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DEPRECIACION">
-          <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="1" />
+          <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="0..1" />
           <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Depreciacion">
@@ -341,14 +358,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="activosEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="activosEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Activos" EntityType="Self.Activos" />
           <EntitySet Name="Asegurador" EntityType="Self.Asegurador" />
           <EntitySet Name="Depreciacion" EntityType="Self.Depreciacion" />
           <EntitySet Name="Marca" EntityType="Self.Marca" />
           <EntitySet Name="TipoActivo" EntityType="Self.TipoActivo" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="Vendedor" EntityType="Self.Vendedor" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <AssociationSet Name="FK_ACTIVO" Association="Self.FK_ACTIVO">
             <End Role="Activos" EntitySet="Activos" />
             <End Role="Depreciacion" EntitySet="Depreciacion" />
@@ -379,7 +396,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="activosModelStoreContainer" CdmEntityContainer="activosEntities1">
+        <EntityContainerMapping StorageEntityContainer="activosModelStoreContainer" CdmEntityContainer="activosEntities2">
           <EntitySetMapping Name="Activos">
             <EntityTypeMapping TypeName="activosModel.Activos">
               <MappingFragment StoreEntitySet="Activos">
@@ -437,15 +454,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="activosModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Vendedor">
             <EntityTypeMapping TypeName="activosModel.Vendedor">
               <MappingFragment StoreEntitySet="Vendedor">
@@ -455,6 +463,16 @@
                 <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
                 <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
                 <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="activosModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
