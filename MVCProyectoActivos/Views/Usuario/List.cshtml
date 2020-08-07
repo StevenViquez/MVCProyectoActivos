@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Infrastructure.Models.Usuario>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contrasena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoUsuario)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Usuario1)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Contrasena)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TipoUsuario)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id=item.UsuarioID }) |
+        @Html.ActionLink("Details", "Details", new { id=item.UsuarioID }) |
+        @Html.ActionLink("Delete", "Delete", new { id=item.UsuarioID })
+    </td>
+</tr>
+}
+
+</table>

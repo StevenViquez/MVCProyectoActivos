@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Infrastructure.Models.TipoActivo>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoActivoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TipoActivoID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Descripcion)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.TipoActivoID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.TipoActivoID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.TipoActivoID })
+    </td>
+</tr>
+}
+
+</table>

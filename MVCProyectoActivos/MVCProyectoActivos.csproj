@@ -145,6 +145,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AseguradorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MarcaController.cs" />
+    <Compile Include="Controllers\TipoActivoController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,9 +195,25 @@
     <Content Include="Views\Asegurador\Create.cshtml" />
     <Content Include="Views\Asegurador\Edit.cshtml" />
     <Content Include="Views\Asegurador\Details.cshtml" />
+    <Content Include="Views\Shared\_MyLayout.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Marca\List.cshtml" />
+    <Content Include="Views\Marca\Create.cshtml" />
+    <Content Include="Views\Marca\Delete.cshtml" />
+    <Content Include="Views\Marca\Edit.cshtml" />
+    <Content Include="Views\Marca\Details.cshtml" />
+    <Content Include="Views\TipoActivo\List.cshtml" />
+    <Content Include="Views\TipoActivo\Edit.cshtml" />
+    <Content Include="Views\TipoActivo\Create.cshtml" />
+    <Content Include="Views\TipoActivo\Details.cshtml" />
+    <Content Include="Views\TipoActivo\Delete.cshtml" />
+    <Content Include="Views\Usuario\List.cshtml" />
+    <Content Include="Views\Usuario\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

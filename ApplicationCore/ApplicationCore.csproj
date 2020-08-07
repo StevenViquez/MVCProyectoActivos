@@ -48,6 +48,9 @@
     <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\IServiceVendedor.cs" />
     <Compile Include="Services\ServiceAsegurador.cs" />
+    <Compile Include="Services\ServiceMarca.cs" />
+    <Compile Include="Services\ServiceTipoActivo.cs" />
+    <Compile Include="Services\ServiceUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />

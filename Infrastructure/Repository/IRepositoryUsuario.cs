@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.Services
+namespace Infrastructure.Repository
 {
-    public interface IServiceUsuario
+    public interface IRepositoryUsuario
     {
         IEnumerable<Usuario> GetUsuario();
         Usuario GetUsuarioByID(string id);
-
-        Usuario GetUsuario(string id, string password);
         void DeleteUsuario(string id);
         Usuario Save(Usuario usuario);
+
+        Usuario GetUsuario(string id, string password);
     }
 }

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.Services
+namespace Infrastructure.Repository
 {
-    public interface IServiceMarca
+    public interface IRepositoryMarca
     {
         IEnumerable<Marca> GetMarca();
         Marca GetMarcaByID(int id);

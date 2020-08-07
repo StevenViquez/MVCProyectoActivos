@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.Services
+namespace Infrastructure.Repository
 {
-    public interface IServiceTipoActivo
+    public interface IRepositoryTipoActivo
     {
         IEnumerable<TipoActivo> GetTipoActivo();
         TipoActivo GetTipoActivoByID(int id);
