@@ -3,6 +3,7 @@ using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,10 +11,13 @@ namespace MVCProyectoActivos.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
+
         public ActionResult Index()
         {
+
+
             return View();
+
         }
 
         [ValidateAntiForgeryToken]
@@ -25,17 +29,17 @@ namespace MVCProyectoActivos.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    oUsuario = _ServiceUsuario.GetUsuario(usuario.Usuario1, usuario.Contrasena);
+                    oUsuario = _ServiceUsuario.GetUsuario(usuario.Login, usuario.Password);
 
                     if (oUsuario != null)
                     {
                         Session["User"] = oUsuario;
-                        //Log.Info($"Accede {oUsuario.Nombre} {oUsuario.Apellidos} con el rol {oUsuario.Rol.IdRol}-{oUsuario.Rol.Descripcion}");
+                        Log.Info($"Accede {oUsuario.Nombre} {oUsuario.Apellidos} con el rol {oUsuario.Rol.IdRol}-{oUsuario.Rol.Descripcion}");
                         return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                       // Log.Warn($"{usuario.Login} se intentó conectar  y falló");
+                        Log.Warn($"{usuario.Login} se intentó conectar  y falló");
                         TempData["Message"] = "Error al autenticarse";
 
                     }
@@ -46,7 +50,7 @@ namespace MVCProyectoActivos.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                //Log.Error(ex, MethodBase.GetCurrentMethod());
+                Log.Error(ex, MethodBase.GetCurrentMethod());
                 // Pasar el Error a la página que lo muestra
                 TempData["Message"] = ex.Message;
                 TempData.Keep();
@@ -63,7 +67,7 @@ namespace MVCProyectoActivos.Controllers
                 if (Session["User"] != null)
                 {
                     Usuario oUsuario = Session["User"] as Usuario;
-                    //Log.Warn($"El usuario {oUsuario.Nombre} {oUsuario.Apellidos} con el rol {oUsuario.Rol.IdRol}-{oUsuario.Rol.Descripcion}, intentó acceder una página sin derechos  ");
+                    Log.Warn($"El usuario {oUsuario.Nombre} {oUsuario.Apellidos} con el rol {oUsuario.Rol.IdRol}-{oUsuario.Rol.Descripcion}, intentó acceder una página sin derechos  ");
                 }
 
                 return View();
@@ -71,7 +75,7 @@ namespace MVCProyectoActivos.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                //Log.Error(ex, MethodBase.GetCurrentMethod());
+                Log.Error(ex, MethodBase.GetCurrentMethod());
                 // Pasar el Error a la página que lo muestra
                 TempData["Message"] = ex.Message;
                 TempData.Keep();
@@ -84,14 +88,14 @@ namespace MVCProyectoActivos.Controllers
         {
             try
             {
-               // Log.Info("Se desconectó ");
+                Log.Info("Se desconectó ");
                 Session["User"] = null;
                 return RedirectToAction("Index", "Login");
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                //Log.Error(ex, MethodBase.GetCurrentMethod());
+                Log.Error(ex, MethodBase.GetCurrentMethod());
                 // Pasar el Error a la página que lo muestra
                 TempData["Message"] = ex.Message;
                 TempData.Keep();

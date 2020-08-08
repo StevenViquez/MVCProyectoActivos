@@ -18,6 +18,8 @@
         <AssociationConnector Association="activosModel.FK_MARCA" ManuallyRouted="false" />
         <AssociationConnector Association="activosModel.FK_TIPO_ACTIVO" ManuallyRouted="false" />
         <AssociationConnector Association="activosModel.FK_VENDEDOR" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="activosModel.Rol" Width="1.5" PointX="3.5" PointY="7.5" />
+        <AssociationConnector Association="activosModel.FK_ROL" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

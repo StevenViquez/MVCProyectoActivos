@@ -6,38 +6,66 @@
 
 <h2>List</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Usuario1)
+            @Html.DisplayNameFor(model => model.Nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Contrasena)
+            @Html.DisplayNameFor(model => model.Apellidos)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TipoUsuario)
+            @Html.DisplayNameFor(model => model.Password)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rol.Descripcion)
+        </th>
+        <th></th>
     </tr>
+
+
 
 @foreach (var item in Model) {
 <tr>
     <td>
-        @Html.DisplayFor(modelItem => item.Usuario1)
+        @Html.DisplayFor(modelItem => item.Nombre)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Contrasena)
+        @Html.DisplayFor(modelItem => item.Apellidos)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.TipoUsuario)
+        @Html.DisplayFor(modelItem => item.Password)
+    </td>
+
+    @{
+        string estado = "";
+        if (item.Estado.Equals("1"))
+        {
+            estado = "ACTIVO";
+        }
+        else
+        {
+            estado = "INACTIVO";
+        }
+    }
+
+    <td>
+        @Html.DisplayFor(modelItem => estado)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id=item.UsuarioID }) |
-        @Html.ActionLink("Details", "Details", new { id=item.UsuarioID }) |
-        @Html.ActionLink("Delete", "Delete", new { id=item.UsuarioID })
+        @Html.DisplayFor(modelItem => item.Rol.Descripcion)
     </td>
+    @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Login }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Login }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Login })
+        </td>*@
 </tr>
 }
 

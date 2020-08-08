@@ -32,5 +32,6 @@ namespace Infrastructure.Models
         public virtual DbSet<TipoActivo> TipoActivo { get; set; }
         public virtual DbSet<Vendedor> Vendedor { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Rol> Rol { get; set; }
     }
 }

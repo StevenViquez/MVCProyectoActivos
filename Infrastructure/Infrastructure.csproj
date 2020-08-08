@@ -83,6 +83,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Rol.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoActivo.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>

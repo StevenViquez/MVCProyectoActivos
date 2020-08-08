@@ -22,7 +22,7 @@ namespace Infrastructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     Usuario usuario = new Usuario()
                     {
-                        Usuario1 = id
+                        Login = id
                     };
                     ctx.Entry(usuario).State = EntityState.Deleted;
                     returno = ctx.SaveChanges();
@@ -50,15 +50,10 @@ namespace Infrastructure.Repository
 
                 using (MyContext ctx = new MyContext())
                 {
-                    //ctx.Configuration.LazyLoadingEnabled = false;
-                    //usuario = ctx.Usuario.
-                    //          Include("Rol").
-                    //          Where(p => p.Usuario1 == id).
-                    //          FirstOrDefault<Usuario>();
-
                     ctx.Configuration.LazyLoadingEnabled = false;
                     usuario = ctx.Usuario.
-                              Where(p => p.Usuario1 == id).
+                              Include("Rol").
+                              Where(p => p.Login == id).
                               FirstOrDefault<Usuario>();
                 }
 
@@ -87,8 +82,7 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //lista = ctx.Usuario.Include("Rol").ToList<Usuario>();
-                    lista = ctx.Usuario.ToList<Usuario>();
+                    lista = ctx.Usuario.Include("Rol").ToList<Usuario>();
                 }
                 return lista;
             }
@@ -116,7 +110,7 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    oUsuario = GetUsuarioByID(usuario.Usuario1);
+                    oUsuario = GetUsuarioByID(usuario.Login);
                     if (oUsuario == null)
                     {
                         ctx.Usuario.Add(usuario);
@@ -129,7 +123,7 @@ namespace Infrastructure.Repository
                 }
 
                 if (retorno >= 0)
-                    oUsuario = GetUsuarioByID(usuario.Usuario1);
+                    oUsuario = GetUsuarioByID(usuario.Login);
 
                 return oUsuario;
             }
@@ -160,7 +154,7 @@ namespace Infrastructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oUsuario = ctx.Usuario.
-                                 Where(p => p.Usuario1.Equals(id) && p.Contrasena == password).
+                                 Where(p => p.Login.Equals(id) && p.Password == password).
                                  FirstOrDefault<Usuario>();
                 }
 
