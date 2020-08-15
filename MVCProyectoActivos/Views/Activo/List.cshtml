@@ -45,19 +45,22 @@
             @Html.DisplayNameFor(model => model.FotoActivo)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.ValorActual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VidaUtil)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Asegurador1.Descripcion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Depreciacion1.Valor)
+            @Html.DisplayNameFor(model => model.Marca1.Descripcion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Marca1.MarcaID)
+            @Html.DisplayNameFor(model => model.TipoActivo1.Descripcion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TipoActivo1.TipoActivoID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vendedor1.VendedorID)
+            @Html.DisplayNameFor(model => model.Vendedor1.Descripcion)
         </th>
         <th></th>
     </tr>
@@ -92,16 +95,29 @@
             @Html.DisplayFor(modelItem => item.CondicionActivo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FotoFactura)
+            @*@Html.DisplayFor(modelItem => item.FotoFactura)*@
+
+            <div class="col-md-10">
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.FotoFactura)" id="ImagenProducto" style="height:75px;width:75px">
+            </div>
+
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FotoActivo)
+            @*@Html.DisplayFor(modelItem => item.FotoActivo)*@
+
+            <div class="col-md-10">
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.FotoActivo)" id="ImagenProducto" style="height:75px;width:75px">
+            </div>
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorActual)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VidaUtil)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Asegurador1.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Depreciacion1.Valor)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Marca1.Descripcion)

@@ -19,8 +19,8 @@
           <Property Name="CostoDolares" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CondicionActivo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="FotoFactura" Type="binary" MaxLength="1" Nullable="false" />
-          <Property Name="FotoActivo" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="FotoFactura" Type="varbinary(max)" Nullable="false" />
+          <Property Name="FotoActivo" Type="varbinary(max)" Nullable="false" />
           <Property Name="Marca" Type="int" Nullable="false" />
           <Property Name="Vendedor" Type="int" Nullable="false" />
           <Property Name="Asegurador" Type="int" Nullable="false" />
@@ -235,8 +235,8 @@
           <Property Name="CostoDolares" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CondicionActivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FotoFactura" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
-          <Property Name="FotoActivo" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="FotoFactura" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="FotoActivo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Marca" Type="Int32" Nullable="false" />
           <Property Name="Vendedor" Type="Int32" Nullable="false" />
           <Property Name="Asegurador" Type="Int32" Nullable="false" />

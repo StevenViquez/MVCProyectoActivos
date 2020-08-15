@@ -13,9 +13,9 @@ namespace Infrastructure.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MyModel : DbContext
+    public partial class MyContext : DbContext
     {
-        public MyModel()
+        public MyContext()
             : base("name=activosEntities2")
         {
         }

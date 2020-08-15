@@ -69,8 +69,8 @@ CREATE TABLE [dbo].[Activos]
   [CostoDolares] [DECIMAL](18, 2)NOT NULL, 
   [Descripcion] [VARCHAR](50) NOT NULL,
   [CondicionActivo] [VARCHAR](50) NOT NULL, --Excelente, Bueno, Regular & Malo
-  [FotoFactura] [BINARY] NOT NULL, 
-  [FotoActivo] [BINARY] NOT NULL, 
+  [FotoFactura] [VARBINARY](MAX) NOT NULL, 
+  [FotoActivo] [VARBINARY](MAX) NOT NULL, 
   [Marca] [int] NOT NULL, --[dbo].[Marca]
   [Vendedor] [int] NOT NULL, --[dbo].[Vendedor]
   [Asegurador] [int] NOT NULL, --[dbo].[Asegurador]
@@ -81,6 +81,9 @@ CREATE TABLE [dbo].[Activos]
 
 --ALTER TABLE [dbo].[Activos]
 --ADD [VidaUtil] [int];
+
+--ALTER TABLE [dbo].[Activos] ALTER COLUMN [FotoFactura] [VARBINARY](MAX) NOT NULL;
+--ALTER TABLE [dbo].[Activos] ALTER COLUMN [FotoActivo] [VARBINARY](MAX) NOT NULL;
 
 
 CREATE TABLE [dbo].[Usuario]
