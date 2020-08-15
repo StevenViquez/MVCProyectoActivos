@@ -14,19 +14,11 @@ namespace Infrastructure.Models
     
     public partial class Depreciacion
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Depreciacion()
-        {
-            this.Activos1 = new HashSet<Activos>();
-        }
-    
         public int DepreciacionID { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Valor { get; set; }
         public Nullable<int> Activo { get; set; }
     
         public virtual Activos Activos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Activos> Activos1 { get; set; }
     }
 }

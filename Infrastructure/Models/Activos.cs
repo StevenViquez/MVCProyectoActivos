@@ -37,11 +37,11 @@ namespace Infrastructure.Models
         public int Asegurador { get; set; }
         public int TipoActivo { get; set; }
         public Nullable<int> ValorActual { get; set; }
+        public Nullable<int> VidaUtil { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Depreciacion> Depreciacion { get; set; }
         public virtual Asegurador Asegurador1 { get; set; }
-        public virtual Depreciacion Depreciacion1 { get; set; }
         public virtual Marca Marca1 { get; set; }
         public virtual TipoActivo TipoActivo1 { get; set; }
         public virtual Vendedor Vendedor1 { get; set; }

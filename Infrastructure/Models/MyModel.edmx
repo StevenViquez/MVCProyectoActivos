@@ -26,6 +26,7 @@
           <Property Name="Asegurador" Type="int" Nullable="false" />
           <Property Name="TipoActivo" Type="int" Nullable="false" />
           <Property Name="ValorActual" Type="int" />
+          <Property Name="VidaUtil" Type="int" />
         </EntityType>
         <EntityType Name="Asegurador">
           <Key>
@@ -117,18 +118,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DEPRECIACION">
-          <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="0..1" />
-          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Depreciacion">
-              <PropertyRef Name="DepreciacionID" />
-            </Principal>
-            <Dependent Role="Activos">
-              <PropertyRef Name="ValorActual" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MARCA">
           <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
           <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
@@ -207,10 +196,6 @@
             <End Role="Asegurador" EntitySet="Asegurador" />
             <End Role="Activos" EntitySet="Activos" />
           </AssociationSet>
-          <AssociationSet Name="FK_DEPRECIACION" Association="Self.FK_DEPRECIACION">
-            <End Role="Depreciacion" EntitySet="Depreciacion" />
-            <End Role="Activos" EntitySet="Activos" />
-          </AssociationSet>
           <AssociationSet Name="FK_MARCA" Association="Self.FK_MARCA">
             <End Role="Marca" EntitySet="Marca" />
             <End Role="Activos" EntitySet="Activos" />
@@ -259,10 +244,10 @@
           <Property Name="ValorActual" Type="Int32" />
           <NavigationProperty Name="Depreciacion" Relationship="Self.FK_ACTIVO" FromRole="Activos" ToRole="Depreciacion" />
           <NavigationProperty Name="Asegurador1" Relationship="Self.FK_ASEGURADOR" FromRole="Activos" ToRole="Asegurador" />
-          <NavigationProperty Name="Depreciacion1" Relationship="Self.FK_DEPRECIACION" FromRole="Activos" ToRole="Depreciacion" />
           <NavigationProperty Name="Marca1" Relationship="Self.FK_MARCA" FromRole="Activos" ToRole="Marca" />
           <NavigationProperty Name="TipoActivo1" Relationship="Self.FK_TIPO_ACTIVO" FromRole="Activos" ToRole="TipoActivo" />
           <NavigationProperty Name="Vendedor1" Relationship="Self.FK_VENDEDOR" FromRole="Activos" ToRole="Vendedor" />
+          <Property Name="VidaUtil" Type="Int32" />
         </EntityType>
         <EntityType Name="Asegurador">
           <Key>
@@ -281,7 +266,6 @@
           <Property Name="Valor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Activo" Type="Int32" />
           <NavigationProperty Name="Activos" Relationship="Self.FK_ACTIVO" FromRole="Depreciacion" ToRole="Activos" />
-          <NavigationProperty Name="Activos1" Relationship="Self.FK_DEPRECIACION" FromRole="Depreciacion" ToRole="Activos" />
         </EntityType>
         <EntityType Name="Marca">
           <Key>
@@ -347,18 +331,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DEPRECIACION">
-          <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="0..1" />
-          <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Depreciacion">
-              <PropertyRef Name="DepreciacionID" />
-            </Principal>
-            <Dependent Role="Activos">
-              <PropertyRef Name="ValorActual" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MARCA">
           <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
           <End Role="Activos" Type="Self.Activos" Multiplicity="*" />
@@ -409,10 +381,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_ASEGURADOR" Association="Self.FK_ASEGURADOR">
             <End Role="Asegurador" EntitySet="Asegurador" />
-            <End Role="Activos" EntitySet="Activos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DEPRECIACION" Association="Self.FK_DEPRECIACION">
-            <End Role="Depreciacion" EntitySet="Depreciacion" />
             <End Role="Activos" EntitySet="Activos" />
           </AssociationSet>
           <AssociationSet Name="FK_MARCA" Association="Self.FK_MARCA">
@@ -488,6 +456,7 @@
           <EntitySetMapping Name="Activos">
             <EntityTypeMapping TypeName="activosModel.Activos">
               <MappingFragment StoreEntitySet="Activos">
+                <ScalarProperty Name="VidaUtil" ColumnName="VidaUtil" />
                 <ScalarProperty Name="ActivoID" ColumnName="ActivoID" />
                 <ScalarProperty Name="NumeroSerie" ColumnName="NumeroSerie" />
                 <ScalarProperty Name="Modelo" ColumnName="Modelo" />

@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="activosModel.Usuario" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
         <AssociationConnector Association="activosModel.FK_ACTIVO" ManuallyRouted="false" />
         <AssociationConnector Association="activosModel.FK_ASEGURADOR" ManuallyRouted="false" />
-        <AssociationConnector Association="activosModel.FK_DEPRECIACION" ManuallyRouted="false" />
         <AssociationConnector Association="activosModel.FK_MARCA" ManuallyRouted="false" />
         <AssociationConnector Association="activosModel.FK_TIPO_ACTIVO" ManuallyRouted="false" />
         <AssociationConnector Association="activosModel.FK_VENDEDOR" ManuallyRouted="false" />
