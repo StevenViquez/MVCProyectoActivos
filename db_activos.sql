@@ -75,8 +75,13 @@ CREATE TABLE [dbo].[Activos]
   [Vendedor] [int] NOT NULL, --[dbo].[Vendedor]
   [Asegurador] [int] NOT NULL, --[dbo].[Asegurador]
   [TipoActivo] [int] NOT NULL, --[dbo].[TipoActivo] 
-  [ValorActual] [int] -- [dbo].[Depreciacion]
+  [ValorActual] [int],
+  [VidaUtil] [int] 
 )
+
+--ALTER TABLE [dbo].[Activos]
+--ADD [VidaUtil] [int];
+
 
 CREATE TABLE [dbo].[Usuario]
 (
@@ -128,7 +133,12 @@ ALTER TABLE [dbo].[Activos] ADD CONSTRAINT FK_MARCA FOREIGN KEY (Marca) REFERENC
 ALTER TABLE [dbo].[Activos] ADD CONSTRAINT FK_VENDEDOR FOREIGN KEY (Vendedor) REFERENCES [dbo].[Vendedor]
 
 --ACTIVOS <> DEPRECIACION:
-ALTER TABLE [dbo].[Activos] ADD CONSTRAINT FK_DEPRECIACION FOREIGN KEY (ValorActual) REFERENCES [dbo].[Depreciacion]
+--ALTER TABLE [dbo].[Activos] ADD CONSTRAINT FK_DEPRECIACION FOREIGN KEY (ValorActual) REFERENCES [dbo].[Depreciacion]
+
+--ALTER TABLE [dbo].[Activos]  
+--DROP CONSTRAINT FK_DEPRECIACION;   
+--GO 
+
 
 --DEPRECIACION <> ACTIVOS:
 ALTER TABLE [dbo].[Depreciacion] ADD CONSTRAINT FK_ACTIVO FOREIGN KEY (Activo) REFERENCES [dbo].[Activos]
