@@ -18,16 +18,18 @@ namespace Infrastructure.Models
         public Vendedor()
         {
             this.Activos = new HashSet<Activos>();
+            this.TelefonoVendedor = new HashSet<TelefonoVendedor>();
         }
     
         public int VendedorID { get; set; }
         public string CedulaJuridica { get; set; }
         public string Descripcion { get; set; }
-        public string Telefonos { get; set; }
         public string CorreoElectronico { get; set; }
         public string NombreContacto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Activos> Activos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TelefonoVendedor> TelefonoVendedor { get; set; }
     }
 }

@@ -57,6 +57,14 @@
           <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="TelefonoVendedor">
+          <Key>
+            <PropertyRef Name="TelefonoID" />
+          </Key>
+          <Property Name="TelefonoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendedorID" Type="int" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="TipoActivo">
           <Key>
             <PropertyRef Name="TipoActivoID" />
@@ -82,7 +90,6 @@
           <Property Name="VendedorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CedulaJuridica" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Telefonos" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="CorreoElectronico" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NombreContacto" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
@@ -170,12 +177,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VENDEDOR_TELEFONO">
+          <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="1" />
+          <End Role="TelefonoVendedor" Type="Self.TelefonoVendedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedor">
+              <PropertyRef Name="VendedorID" />
+            </Principal>
+            <Dependent Role="TelefonoVendedor">
+              <PropertyRef Name="VendedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="activosModelStoreContainer">
           <EntitySet Name="Activos" EntityType="Self.Activos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Asegurador" EntityType="Self.Asegurador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Depreciacion" EntityType="Self.Depreciacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TelefonoVendedor" EntityType="Self.TelefonoVendedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoActivo" EntityType="Self.TipoActivo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
@@ -206,6 +226,10 @@
           <AssociationSet Name="FK_VENDEDOR" Association="Self.FK_VENDEDOR">
             <End Role="Vendedor" EntitySet="Vendedor" />
             <End Role="Activos" EntitySet="Activos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDEDOR_TELEFONO" Association="Self.FK_VENDEDOR_TELEFONO">
+            <End Role="Vendedor" EntitySet="Vendedor" />
+            <End Role="TelefonoVendedor" EntitySet="TelefonoVendedor" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -282,10 +306,10 @@
           <Property Name="VendedorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CedulaJuridica" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telefonos" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NombreContacto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Activos" Relationship="Self.FK_VENDEDOR" FromRole="Vendedor" ToRole="Activos" />
+          <NavigationProperty Name="TelefonoVendedor" Relationship="activosModel.FK_VENDEDOR_TELEFONO" FromRole="Vendedor" ToRole="TelefonoVendedor" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -408,6 +432,11 @@
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
+          <EntitySet Name="TelefonoVendedor" EntityType="activosModel.TelefonoVendedor" />
+          <AssociationSet Name="FK_VENDEDOR_TELEFONO" Association="activosModel.FK_VENDEDOR_TELEFONO">
+            <End Role="Vendedor" EntitySet="Vendedor" />
+            <End Role="TelefonoVendedor" EntitySet="TelefonoVendedor" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Rol">
           <Key>
@@ -426,6 +455,27 @@
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TelefonoVendedor">
+          <Key>
+            <PropertyRef Name="TelefonoID" />
+          </Key>
+          <Property Name="TelefonoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendedorID" Type="Int32" Nullable="false" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vendedor" Relationship="activosModel.FK_VENDEDOR_TELEFONO" FromRole="TelefonoVendedor" ToRole="Vendedor" />
+        </EntityType>
+        <Association Name="FK_VENDEDOR_TELEFONO">
+          <End Type="activosModel.Vendedor" Role="Vendedor" Multiplicity="1" />
+          <End Type="activosModel.TelefonoVendedor" Role="TelefonoVendedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedor">
+              <PropertyRef Name="VendedorID" />
+            </Principal>
+            <Dependent Role="TelefonoVendedor">
+              <PropertyRef Name="VendedorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -498,7 +548,6 @@
                 <ScalarProperty Name="VendedorID" ColumnName="VendedorID" />
                 <ScalarProperty Name="CedulaJuridica" ColumnName="CedulaJuridica" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
                 <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
                 <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
               </MappingFragment>
@@ -521,6 +570,15 @@
               <MappingFragment StoreEntitySet="Rol">
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TelefonoVendedor">
+            <EntityTypeMapping TypeName="activosModel.TelefonoVendedor">
+              <MappingFragment StoreEntitySet="TelefonoVendedor">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="VendedorID" ColumnName="VendedorID" />
+                <ScalarProperty Name="TelefonoID" ColumnName="TelefonoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

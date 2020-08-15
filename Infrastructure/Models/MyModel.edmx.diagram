@@ -20,6 +20,8 @@
         <AssociationConnector Association="activosModel.FK_VENDEDOR" ManuallyRouted="false" />
         <EntityTypeShape EntityType="activosModel.Rol" Width="1.5" PointX="3.5" PointY="7.5" />
         <AssociationConnector Association="activosModel.FK_ROL" />
+        <EntityTypeShape EntityType="activosModel.TelefonoVendedor" Width="1.5" PointX="3" PointY="11.75" />
+        <AssociationConnector Association="activosModel.FK_VENDEDOR_TELEFONO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

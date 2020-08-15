@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Infrastructure.Models.TelefonoVendedor>
+
+<p>
+    @Html.ActionLink("Agregar Telefono", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vendedor.NombreContacto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Vendedor.NombreContacto)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Telefono)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.TelefonoID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.TelefonoID })
+    </td>
+</tr>
+}
+
+</table>

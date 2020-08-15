@@ -25,6 +25,25 @@ namespace MVCProyectoActivos
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            //Create bundle for jQueryUI  
+            //js  
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                          "~/Scripts/jquery-ui-{version}.js"));
+            //css  
+            bundles.Add(new StyleBundle("~/Content/cssjqueryui").Include(
+                         "~/Content/themes/base/*.css"));
+
+            // Toast 
+            bundles.Add(new ScriptBundle("~/bundles/toastjs").Include(
+                "~/Scripts/toastr.js"));
+
+            // Ajax unobtrusive
+            // JQUERY UNOBTRUSIVE PARA @Ajax.BeginForm() 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include(
+                        "~/Scripts/jquery.unobtrusive*"));
+
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

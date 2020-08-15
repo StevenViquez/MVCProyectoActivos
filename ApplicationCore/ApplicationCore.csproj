@@ -42,15 +42,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IServiceActivos.cs" />
     <Compile Include="Services\IServiceAsegurador.cs" />
     <Compile Include="Services\IServiceMarca.cs" />
     <Compile Include="Services\IServiceTipoActivo.cs" />
     <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\IServiceVendedor.cs" />
+    <Compile Include="Services\ServiceActivos.cs" />
     <Compile Include="Services\ServiceAsegurador.cs" />
     <Compile Include="Services\ServiceMarca.cs" />
     <Compile Include="Services\ServiceTipoActivo.cs" />
     <Compile Include="Services\ServiceUsuario.cs" />
+    <Compile Include="Services\ServiceVendedor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />

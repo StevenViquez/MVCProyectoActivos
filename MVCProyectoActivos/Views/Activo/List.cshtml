@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Infrastructure.Models.Activos>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaVencimientoSeguro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaVencimientoGarantia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostoColones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostoDolares)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CondicionActivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FotoFactura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FotoActivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Asegurador1.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Depreciacion1.Valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Marca1.MarcaID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoActivo1.TipoActivoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vendedor1.VendedorID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroSerie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCompra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaVencimientoSeguro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaVencimientoGarantia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostoColones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostoDolares)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CondicionActivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FotoFactura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FotoActivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asegurador1.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Depreciacion1.Valor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Marca1.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoActivo1.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vendedor1.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ActivoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ActivoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ActivoID })
+        </td>
+    </tr>
+}
+
+</table>
