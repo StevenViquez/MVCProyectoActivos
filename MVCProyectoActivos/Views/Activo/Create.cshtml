@@ -7,8 +7,18 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm("Save", "Activo", FormMethod.Post, new { enctype = "multipart/form-data"}))
+@*@using (Html.BeginForm("Save", "Activo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {*@
+
+@using (Ajax.BeginForm("Save", "Activo", null, new AjaxOptions
 {
+
+    HttpMethod = "GET",
+    OnBegin = "onBeginSubmit",
+}, new { id = "AjaxForm", enctype = "multipart/form-data" }))
+{
+
+
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -31,18 +41,12 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.FechaCompra, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FechaCompra, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FechaCompra, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+        @*FECHA DE COMPRA>*@
         <div class="form-group">
             @Html.LabelFor(model => model.FechaCompra, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @* Html.EditorFor(model => model.FechaInclusion, new { htmlAttributes = new { @class = "form-control" ,   @readonly = "true", @Value = DateTime.Now} })*@
-                @Html.EditorFor(model => model.FechaCompra, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FechaCompra, new { @id = "FechaCompra", htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FechaCompra, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,18 +68,20 @@
             </div>
         </div>
 
+        @*COLONES*@
         <div class="form-group">
             @Html.LabelFor(model => model.CostoColones, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CostoColones, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CostoColones, new { @id = "CostoColones", htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CostoColones, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        @*DOLAR*@
         <div class="form-group">
             @Html.LabelFor(model => model.CostoDolares, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CostoDolares, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CostoDolares, new { htmlAttributes = new { @id = "precioDolar", @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.CostoDolares, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -91,10 +97,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CondicionActivo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CondicionActivo, new { htmlAttributes = new { @class = "form-control" } })
+                Excelente @Html.RadioButtonFor(model => model.CondicionActivo, "Excelente", new { Checked = true })
+                Bueno @Html.RadioButtonFor(model => model.CondicionActivo, "Bueno", new { htmlAttributes = new { @class = "form-control" } })
+                Regular @Html.RadioButtonFor(model => model.CondicionActivo, "Regular", new { htmlAttributes = new { @class = "form-control" } })
+                Malo @Html.RadioButtonFor(model => model.CondicionActivo, "Malo", new { htmlAttributes = new { @class = "form-control" } })
+
                 @Html.ValidationMessageFor(model => model.CondicionActivo, "", new { @class = "text-danger" })
             </div>
         </div>
+
 
         @*FOTO DE FACTURA*@
         <div class="form-group">
@@ -177,6 +188,13 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="btnEvent" value="test" />
+
+            </div>
+        </div>
+
     </div>
 }
 
@@ -193,4 +211,49 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
+
+    @* Function is in charge of populating 'precioDolar' text input
+        based on date and value entered in "Colones", the function send a post response
+        with Colones valuea as well as Fecha compra date, once at Controller site the
+        action result "Dolar" make a Dolar request to ApplicationCore >> DTOS >> ServiceBCCR which will
+        return a decimal value with the conversion DOLAR<>COLONES value as requested. Once the action
+        result "Dolar" receives the value "Dolar" this value is used to divide "Precio Colones" in order
+        to get "Activo" price in dolard on real time.
+
+        Keyup: https://api.jquery.com/keyup/
+        Change: https://api.jquery.com/change/
+    *@
+
+    <script>
+            $(function()
+            {
+                $('#CostoColones, #FechaCompra').on('keyup change',function () {
+
+
+                    var precioColones = $('#CostoColones').val();
+
+                    var fechaDeCompra = $('#FechaCompra').val();
+
+                    console.log(precioColones);
+
+                    var url = "@Url.Action("Dolar","Activo")";
+                    $.post(url + "?fechaDeCompra=" + fechaDeCompra + "&costoColones=" + precioColones, function (response) {
+                    if(response.Status==="success")
+                    {
+                        $("#precioDolar").val(response.Dolar);
+                    }
+                    else
+                    {
+                        alert("Invalid respose");
+                    }
+                    });
+                });
+            });
+    </script>
+
+
+
+
+
+    @*https://stackoverflow.com/questions/34502189/change-value-of-editorfor-on-dropdownfor-value-change*@
 }

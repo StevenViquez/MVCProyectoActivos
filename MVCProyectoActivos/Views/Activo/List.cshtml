@@ -18,9 +18,6 @@
             @Html.DisplayNameFor(model => model.Modelo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaCompra)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.FechaVencimientoSeguro)
         </th>
         <th>
@@ -33,13 +30,7 @@
             @Html.DisplayNameFor(model => model.CostoDolares)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.CondicionActivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FotoFactura)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FotoActivo)
@@ -47,22 +38,6 @@
         <th>
             @Html.DisplayNameFor(model => model.ValorActual)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VidaUtil)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Asegurador1.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Marca1.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoActivo1.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vendedor1.Descripcion)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -72,9 +47,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Modelo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCompra)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FechaVencimientoSeguro)
@@ -89,18 +61,7 @@
             @Html.DisplayFor(modelItem => item.CostoDolares)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.CondicionActivo)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.FotoFactura)*@
-
-            <div class="col-md-10">
-                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.FotoFactura)" id="ImagenProducto" style="height:75px;width:75px">
-            </div>
-
         </td>
         <td>
             @*@Html.DisplayFor(modelItem => item.FotoActivo)*@
@@ -112,21 +73,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ValorActual)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VidaUtil)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Asegurador1.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Marca1.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoActivo1.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vendedor1.Descripcion)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ActivoID }) |

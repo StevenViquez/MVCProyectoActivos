@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Services;
+﻿using ApplicationCore.DTOS;
+using ApplicationCore.Services;
 using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
@@ -90,7 +91,7 @@ namespace MVCProyectoActivos.Controllers
                 if (ModelState.IsValid)
                 {
                     IServiceActivos _ServiceActivos = new ServiceActivos();
-                    _ServiceActivos.Save(activos);
+                    _ServiceActivos.SaveTransaccion(activos);
                 }
                 else
                 {
@@ -175,6 +176,17 @@ namespace MVCProyectoActivos.Controllers
                 }
 
                 activos = _ServiceActivos.GetActivoByID(id.Value);
+                IServiceMarca _ServiceMarca = new ServiceMarca();
+                ViewBag.ListaMarca = _ServiceMarca.GetMarca();
+
+                IServiceVendedor _ServiceVendedor = new ServiceVendedor();
+                ViewBag.ListaVendedor = _ServiceVendedor.GetVendedor();
+
+                IServiceAsegurador _ServiceAsegurador = new ServiceAsegurador();
+                ViewBag.ListaAsegurador = _ServiceAsegurador.GetAsegurador();
+
+                IServiceTipoActivo _ServiceTipoActivo = new ServiceTipoActivo();
+                ViewBag.ListaTipoActivo = _ServiceTipoActivo.GetTipoActivo();
                 // Response.StatusCode = 500;
                 return View(activos);
             }
@@ -280,5 +292,23 @@ namespace MVCProyectoActivos.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+        [HttpPost]
+        public ActionResult Dolar(DateTime? fechaDeCompra, decimal? costoColones)
+        {
+            //Of course you want to authorize the call
+            ServiceBCCR oServiceBCCR = new ServiceBCCR();
+            decimal dolar = Convert.ToDecimal(costoColones / oServiceBCCR.GetDolar(Convert.ToDateTime(fechaDeCompra)));
+            
+            if (fechaDeCompra != null)
+            {
+                return Json(new { Status = "success", Dolar = Math.Round(dolar,2) });
+            }
+            else
+            {
+                return Json(new { Status = "error Debe ingresar la fecha de compra" });
+            }
+        }
+
     }
 }

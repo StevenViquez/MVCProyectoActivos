@@ -270,6 +270,10 @@
     <Content Include="Views\Vendedor\Details.cshtml" />
     <Content Include="Views\Activo\Create.cshtml" />
     <Content Include="Views\Activo\List.cshtml" />
+    <Content Include="Views\Activo\Delete.cshtml" />
+    <Content Include="Views\Activo\Edit.cshtml" />
+    <Content Include="Views\Activo\Details.cshtml" />
+    <Content Include="Views\Home\Calificacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,6 +12,8 @@ namespace ApplicationCore.Services
         IEnumerable<Activos> GetActivos();
         Activos GetActivoByID(int id);
         void DeleteActivo(int id);
-        Activos Save(Activos activo);
+        //Activos Save(Activos activo);
+
+        Activos SaveTransaccion(Activos activo);
     }
 }

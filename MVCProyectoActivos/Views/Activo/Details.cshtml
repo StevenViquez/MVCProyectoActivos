@@ -1,0 +1,158 @@
+﻿@model Infrastructure.Models.Activos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Activos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroSerie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaVencimientoSeguro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaVencimientoSeguro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaVencimientoGarantia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaVencimientoGarantia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CostoColones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostoColones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CostoDolares)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostoDolares)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CondicionActivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CondicionActivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FotoFactura)
+        </dt>
+
+        <dd>
+            <div class="col-md-10">
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.FotoFactura)" id="ImagenProducto" style="height:75px;width:75px">
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FotoActivo)
+        </dt>
+
+        <dd>
+            <div class="col-md-10">
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.FotoActivo)" id="ImagenProducto" style="height:75px;width:75px">
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorActual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorActual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VidaUtil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VidaUtil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asegurador1.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asegurador1.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca1.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca1.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoActivo1.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoActivo1.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendedor1.CedulaJuridica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendedor1.CedulaJuridica)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ActivoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

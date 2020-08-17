@@ -26,5 +26,12 @@ namespace MVCProyectoActivos.Controllers
 
             return View();
         }
+
+        public ActionResult Calificacion()
+        {
+            ViewBag.Message = "Calificacion";
+
+            return View();
+        }
     }
 }
