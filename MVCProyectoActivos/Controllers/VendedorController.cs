@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Services;
 using Infrastructure.Models;
+using MVCProyectoActivos.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace MVCProyectoActivos.Controllers
     {
         // Significa  que solo los que tienen el rol de Administrador pueden accederla 
         // ver Enums.cs  
-        // public enum Roles { Administrador = 1, Procesos = 2, Reportes = 3}
-        //[CustomAuthorize((int)Roles.Administrador)]
+        public enum Roles { Administrador = 1, Procesos = 2, Reportes = 3}
+        [CustomAuthorize((int)Roles.Administrador)]
         // GET: Bodega
         public ActionResult Index()
         {
@@ -36,7 +37,7 @@ namespace MVCProyectoActivos.Controllers
             }
         }
 
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult List()
         {
             IEnumerable<Vendedor> lista = null;
@@ -64,7 +65,7 @@ namespace MVCProyectoActivos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Vendedor vendedor)
         {
             string errores = "";
@@ -106,7 +107,7 @@ namespace MVCProyectoActivos.Controllers
 
 
         // GET: Bodega/Details/5      
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServiceVendedor _ServiceVendedor = new ServiceVendedor();
@@ -136,7 +137,7 @@ namespace MVCProyectoActivos.Controllers
         }
 
         // GET: Bodega/Edit/5
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             IServiceVendedor _ServiceVendedor = new ServiceVendedor();
@@ -166,7 +167,7 @@ namespace MVCProyectoActivos.Controllers
 
 
         // GET: Bodega/Create
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create(Vendedor vendedor)
         {
             TelefonoVendedor telefono = new TelefonoVendedor();
@@ -177,7 +178,7 @@ namespace MVCProyectoActivos.Controllers
 
 
         // GET: Vendedor/Delete/5
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Delete(int? id)
         {
             IServiceVendedor _ServiceVendedor = new ServiceVendedor();
@@ -216,7 +217,7 @@ namespace MVCProyectoActivos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult DeleteConfirmed(int? id)
         {
             ServiceVendedor _ServiceVendedor = new ServiceVendedor();

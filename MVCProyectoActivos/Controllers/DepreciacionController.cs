@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Services;
 using Infrastructure.Models;
+using MVCProyectoActivos.Security;
 using MVCProyectoActivos.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,16 @@ namespace MVCProyectoActivos.Controllers
 {
     public class DepreciacionController : Controller
     {
+
+        public enum Roles { Administrador = 1, Procesos = 2, Reportes = 3 }
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         // GET: Depreciacion
         public ActionResult Index()
         {
             return View();
         }
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult ListActivos()
         {
             IEnumerable<Activos> lista = null;
@@ -43,9 +48,10 @@ namespace MVCProyectoActivos.Controllers
             return View(lista);
         }
 
-        
 
 
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult ListDepreciacion(int id)
         {
 
@@ -84,6 +90,8 @@ namespace MVCProyectoActivos.Controllers
 
 
         //[HttpPost]
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult DepreciacionByDate(int ActivoID, DateTime FechaDepreciacion)
         {
 
@@ -121,6 +129,7 @@ namespace MVCProyectoActivos.Controllers
 
 
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult FilterDepreciacionView(int idActivo)
         {
 

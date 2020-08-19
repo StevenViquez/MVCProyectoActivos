@@ -1,10 +1,10 @@
 ﻿@model MVCProyectoActivos.ViewModel.ViewModelDepreciacion
 
 @{
-    ViewBag.Title = "FilterDepreciacionView";
+    ViewBag.Title = "Filtrar depreciación por fecha";
 }
 
-<h2>FilterDepreciacionView</h2>
+    <h2>Filtrar depreciación por fecha</h2>
 
 
 
@@ -23,7 +23,6 @@
 
 
     <div class="form-group">
-        <h4>ViewModelDepreciacion</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ActivoID)
@@ -34,28 +33,28 @@
                 @Html.EditorFor(model => model.FechaDepreciacion, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FechaDepreciacion, "", new { @class = "text-danger" })
             </div>
-
+                <br />
         </div>
-
+        <br>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Calcular" class="btn btn-default" />
+                <input type="submit" value="Calcular" class="btn btn-success" />
             </div>
         </div>
 
 
     </div>
 
-   
+    <div>
+        @Html.ActionLink("<< Regresar", "ListActivos", null, new { @class = "btn btn-danger" })
+    </div>
 
     @*Muestra un resultado*@
     <div id="resultado" />
 
 }
 
- <div>
-        @Html.ActionLink("Ver todos los activos", "ListActivos")
-    </div>
+ 
 
 
 

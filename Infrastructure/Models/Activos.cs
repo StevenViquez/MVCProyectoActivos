@@ -13,7 +13,7 @@ namespace Infrastructure.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-   // [MetadataType(typeof(ActivosMetadata))]
+   [MetadataType(typeof(ActivosMetadata))]
     public partial class Activos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,13 +26,13 @@ namespace Infrastructure.Models
         public string NumeroSerie { get; set; }
         public string Modelo { get; set; }
 
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         public System.DateTime FechaCompra { get; set; }
 
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         public System.DateTime FechaVencimientoSeguro { get; set; }
 
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         public System.DateTime FechaVencimientoGarantia { get; set; }
         public decimal CostoColones { get; set; }
         public decimal CostoDolares { get; set; }

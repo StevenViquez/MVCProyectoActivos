@@ -4,12 +4,12 @@
     ViewBag.Title = "ActivosCatalogo";
 }
 
-<h2>ActivosCatalogo</h2>
+    <h2>Catálogo de Activos</h2>
 
 <p>
-    @Html.ActionLink("Reporte PDF", "CreatePdfActivosCatalogo", "Reporte")
+    @Html.ActionLink("Ver reporte de activos en PDF", "CreatePdfActivosCatalogo", "Reporte", null, new { @class = "btn btn-warning" })
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.NumeroSerie)
@@ -42,45 +42,48 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroSerie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Modelo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaVencimientoSeguro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaVencimientoGarantia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CostoColones)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CostoDolares)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CondicionActivo)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.FotoActivo)*@
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroSerie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Modelo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaVencimientoSeguro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaVencimientoGarantia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CostoColones)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CostoDolares)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CondicionActivo)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.FotoActivo)*@
 
-                <div class="col-md-10">
-                    <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.FotoActivo)" id="ImagenProducto" style="height:75px;width:75px">
-                </div>
+                    <div class="col-md-10">
+                        <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.FotoActivo)" id="ImagenProducto" style="height:75px;width:75px">
+                    </div>
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorActual)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ActivoID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ActivoID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ActivoID })
-            </td>
-        </tr>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorActual)
+                </td>
+                @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ActivoID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ActivoID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ActivoID })
+                </td>*@
+            </tr>
+        </tbody>
+
     }
 
 </table>

@@ -38,8 +38,8 @@ namespace Infrastructure.Models
         public System.DateTime FechaVencimientoGarantia { get; set; }
 
         [Display(Name = "Costo en Colón CR")]
-        [MaxLength(12)]
-        [MinLength(1)]
+        //[MaxLength(12)]
+        //[MinLength(1)]
         public decimal CostoColones { get; set; }
 
         [Display(Name = "Costo en dólar")]

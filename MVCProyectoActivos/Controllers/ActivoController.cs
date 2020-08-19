@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.DTOS;
 using ApplicationCore.Services;
 using Infrastructure.Models;
+using MVCProyectoActivos.Security;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,8 +16,8 @@ namespace MVCProyectoActivos.Controllers
     {
         // Significa  que solo los que tienen el rol de Administrador pueden accederla 
         // ver Enums.cs  
-        // public enum Roles { Administrador = 1, Procesos = 2, Reportes = 3}
-        //[CustomAuthorize((int)Roles.Administrador)]
+        public enum Roles { Administrador = 1, Procesos = 2, Reportes = 3}
+        [CustomAuthorize((int)Roles.Administrador)]
         // GET: Bodega
         public ActionResult Index()
         {
@@ -38,7 +39,7 @@ namespace MVCProyectoActivos.Controllers
             }
         }
 
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult List()
         {
             IEnumerable<Activos> lista = null;
@@ -66,7 +67,7 @@ namespace MVCProyectoActivos.Controllers
 
         [HttpPost]  
         [ValidateAntiForgeryToken]
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Activos activos, HttpPostedFileBase ImageFile)
         {
             string errores = "";
@@ -132,7 +133,7 @@ namespace MVCProyectoActivos.Controllers
 
 
         // GET: Bodega/Details/5      
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServiceActivos _ServiceActivos = new ServiceActivos();
@@ -162,7 +163,7 @@ namespace MVCProyectoActivos.Controllers
         }
 
         // GET: Bodega/Edit/5
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             IServiceActivos _ServiceActivos = new ServiceActivos();
@@ -203,7 +204,7 @@ namespace MVCProyectoActivos.Controllers
 
 
         // GET: Bodega/Create
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             IServiceMarca _ServiceMarca = new ServiceMarca();
@@ -226,7 +227,7 @@ namespace MVCProyectoActivos.Controllers
 
 
         // GET: Activos/Delete/5
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Delete(int? id)
         {
             IServiceActivos _ServiceActivos = new ServiceActivos();
@@ -271,7 +272,7 @@ namespace MVCProyectoActivos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult DeleteConfirmed(int? id)
         {
             ServiceActivos _ServiceActivos = new ServiceActivos();

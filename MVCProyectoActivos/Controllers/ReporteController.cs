@@ -9,6 +9,7 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using MVCProyectoActivos.Security;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -22,13 +23,14 @@ namespace MVCProyectoActivos.Controllers
 {
     public class ReporteController : Controller
     {
+        public enum Roles { Administrador = 1, Procesos = 2, Reportes = 3 }
         // GET: Reporte
-        //[CustomAuthorize((int)Roles.Administrador, (int)Roles.Reportes)]
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Reportes)]
         public ActionResult Index()
         {
             return View();
         }
-        //[CustomAuthorize((int)Roles.Administrador, (int)Roles.Reportes)]
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Reportes)]
         public ActionResult ActivosCatalogo()
         {
             IEnumerable<Activos> lista = null;
@@ -55,7 +57,7 @@ namespace MVCProyectoActivos.Controllers
         /// Nugget iText7
         /// </summary>
         /// <returns></returns>
-        //[CustomAuthorize((int)Roles.Administrador, (int)Roles.Reportes)]
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Reportes)]
         public ActionResult CreatePdfActivosCatalogo()
         {
             IEnumerable<Activos> lista = null;
@@ -115,7 +117,7 @@ namespace MVCProyectoActivos.Controllers
                 // Calculo del monto total
                 //decimal montoTotal = lista.ToList().Sum(k => k.Cantidad * k.Precio);
                 // Agrega  el monto total
-               // doc.Add(new Paragraph("\n\rMonto total " + montoTotal.ToString("C", CultureInfo.CreateSpecificCulture("cr-CR"))));
+                // doc.Add(new Paragraph("\n\rMonto total " + montoTotal.ToString("C", CultureInfo.CreateSpecificCulture("cr-CR"))));
 
 
                 // Colocar número de páginas

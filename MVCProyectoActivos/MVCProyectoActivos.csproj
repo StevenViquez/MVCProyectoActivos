@@ -193,6 +193,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\CustomAuthenticationFilter.cs" />
+    <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="ViewModel\ViewModelDepreciacion.cs" />
     <Compile Include="ViewModel\ViewModelVencimientoGarantia.cs" />
   </ItemGroup>
@@ -319,6 +321,7 @@
     <Content Include="Views\Depreciacion\FilterDepreciacionView.cshtml" />
     <Content Include="Views\Reporte\ActivosCatalogo.cshtml" />
     <Content Include="Views\Reporte\ListActivos.cshtml" />
+    <Content Include="Views\Login\UnAuthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

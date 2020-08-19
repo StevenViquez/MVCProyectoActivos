@@ -6,86 +6,89 @@
 
     <h2>Depreciación por Activo</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroSerie)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Modelo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaVencimientoSeguro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaVencimientoGarantia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CostoColones)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CostoDolares)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CondicionActivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FotoActivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ValorActual)
-        </th>
-    </tr>
+    <table class="table table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroSerie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaVencimientoSeguro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaVencimientoGarantia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoColones)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoDolares)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CondicionActivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FotoActivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorActual)
+            </th>
+        </tr>
 
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.NumeroSerie)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Modelo)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.FechaVencimientoSeguro)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.FechaVencimientoGarantia)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CostoColones)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CostoDolares)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CondicionActivo)
-    </td>
-    <td>
-        @*@Html.DisplayFor(modelItem => item.FotoActivo)*@
+        @foreach (var item in Model)
+        {
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroSerie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modelo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaVencimientoSeguro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaVencimientoGarantia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoColones)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoDolares)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CondicionActivo)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.FotoActivo)*@
 
-        <div class="col-md-10">
-            <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.FotoActivo)" id="ImagenProducto" style="height:75px;width:75px">
-        </div>
+                <div class="col-md-10">
+                    <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.FotoActivo)" id="ImagenProducto" style="height:75px;width:75px">
+                </div>
 
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ValorActual)
-    </td>
-    <td>
-        @*@Html.ActionLink("Ver depreciación", "ListDepreciacion", new { idActivo = item.ActivoID })*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorActual)
+            </td>
+            <td>
+                @*@Html.ActionLink("Ver depreciación", "ListDepreciacion", new { idActivo = item.ActivoID })*@
 
-        <a onclick="modalDetail(@item.ActivoID)" href="#">Ver todas las depreciaciones</a><br>
-    </td>
-    
-    <td>
-        @Html.ActionLink("Buscar depreciación por fecha", "FilterDepreciacionView", new { idActivo = item.ActivoID })
+                <a class="btn btn-success" onclick="modalDetail(@item.ActivoID)" href="#">Ver todas las depreciaciones</a>
+                
+            </td>
 
-    </td>
-</tr>
-    }
+            <td>
+                @Html.ActionLink("Buscar depreciación por fecha", "FilterDepreciacionView", new { idActivo = item.ActivoID }, new { @class = "btn btn-info" })
 
-</table>
+            </td>
+        </tr>
+    </tbody>
+                }
+
+        </table>
 
 
 <input type="hidden" id="campoOculto" />
@@ -99,7 +102,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Depreciacion</h4>
+                <h4 class="modal-title" id="myModalLabel">Depreciación por Activo</h4>
             </div>
 
             <div class="form-horizontal">
