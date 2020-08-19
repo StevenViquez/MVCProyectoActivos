@@ -145,6 +145,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ActivoController.cs" />
     <Compile Include="Controllers\AseguradorController.cs" />
+    <Compile Include="Controllers\DepreciacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
@@ -155,6 +156,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ViewModelDepreciacion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -274,6 +276,10 @@
     <Content Include="Views\Activo\Edit.cshtml" />
     <Content Include="Views\Activo\Details.cshtml" />
     <Content Include="Views\Home\Calificacion.cshtml" />
+    <Content Include="Views\Depreciacion\ListActivos.cshtml" />
+    <Content Include="Views\Depreciacion\_ListDepreciacion.cshtml" />
+    <Content Include="Views\Depreciacion\FiltrarDepreciacionDate.cshtml" />
+    <Content Include="Views\Depreciacion\FilterDepreciacionView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

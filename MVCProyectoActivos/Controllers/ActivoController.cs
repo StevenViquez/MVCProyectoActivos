@@ -230,13 +230,19 @@ namespace MVCProyectoActivos.Controllers
         public ActionResult Delete(int? id)
         {
             IServiceActivos _ServiceActivos = new ServiceActivos();
+            IServiceDepreciacion _ServiceDepreciacion = new ServiceDepreciacion();
+
             try
             {
 
                 // Es valido
                 if (id != null)
                 {
-                    _ServiceActivos.DeleteActivo(id.Value);
+                    Activos oActivo = _ServiceActivos.GetActivoByID(id.Value);
+                    ////Converting IEnumerable to ICollection
+                    //oActivo.Depreciacion = _ServiceDepreciacion.GetDepreciacionByActivo(id.Value).ToList();
+                    _ServiceDepreciacion.DeleteDepreciacion(id.Value);
+                    _ServiceActivos.DeleteActivo(oActivo);
                 }
                 else
                 {
@@ -278,7 +284,7 @@ namespace MVCProyectoActivos.Controllers
                     return View();
                 }
 
-                _ServiceActivos.DeleteActivo(id.Value);
+                //_ServiceActivos.DeleteActivo(id.Value);
 
                 return RedirectToAction("List");
             }

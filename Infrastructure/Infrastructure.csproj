@@ -101,12 +101,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepositoryActivos.cs" />
     <Compile Include="Repository\IRepositoryAsegurador.cs" />
+    <Compile Include="Repository\IRepositoryDepreciacion.cs" />
     <Compile Include="Repository\IRepositoryMarca.cs" />
     <Compile Include="Repository\IRepositoryTipoActivo.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
     <Compile Include="Repository\IRepositoryVendedor.cs" />
     <Compile Include="Repository\RepositoryActivos.cs" />
     <Compile Include="Repository\RepositoryAsegurador.cs" />
+    <Compile Include="Repository\RepositoryDepreciacion.cs" />
     <Compile Include="Repository\RepositoryMarca.cs" />
     <Compile Include="Repository\RepositoryTipoActivo.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />

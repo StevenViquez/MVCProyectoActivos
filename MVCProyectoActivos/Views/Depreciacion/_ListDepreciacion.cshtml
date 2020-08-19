@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Infrastructure.Models.Depreciacion>
+
+@*<div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <p>Filtrar depreciacion por fecha: <input class="form-control text-box single-line" type="date" id="datepicker"></p>
+    </div>*@
+
+
+
+@*<div class="form-group">
+        <label class="control-label col-md-2" for="FechaVencimientoSeguro">FechaVencimientoSeguro</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-date="The field FechaVencimientoSeguro must be a date." data-val-required="The FechaVencimientoSeguro field is required." id="FechaVencimientoSeguro" name="FechaVencimientoSeguro" type="date" value="" />
+            <span class="field-validation-valid text-danger" data-valmsg-for="FechaVencimientoSeguro" data-valmsg-replace="true"></span>
+        </div>
+    </div>*@
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Activos.ActivoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activos.FotoActivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activos.NumeroSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activos.ActivoID)
+            </td>
+            <td>
+                <div class="col-md-10">
+                    <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Activos.FotoActivo)" id="ImagenProducto" style="height:75px;width:75px">
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activos.NumeroSerie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        // Habilita los tooltips
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+    @* Function is in charge of populating 'precioDolar' text input
+        based on date and value entered in "Colones", the function send a post response
+        with Colones valuea as well as Fecha compra date, once at Controller site the
+        action result "Dolar" make a Dolar request to ApplicationCore >> DTOS >> ServiceBCCR which will
+        return a decimal value with the conversion DOLAR<>COLONES value as requested. Once the action
+        result "Dolar" receives the value "Dolar" this value is used to divide "Precio Colones" in order
+        to get "Activo" price in dolard on real time.
+
+        Keyup: https://api.jquery.com/keyup/
+        Change: https://api.jquery.com/change/
+    *@
+
+@*<script>
+            $(document).ready(function () {
+            $('#datepicker').change(function () {
+                var fecha = $('#datepicker').val();
+
+                alert('@TempData["IdActivo"]')
+
+                debugger
+
+                var id = '@TempData["IdActivo"]';
+
+
+                console.log(fecha);
+
+                console.log(id);
+
+                var url = "@Url.Action("DepreciacionByDate", "Depreciacion")";
+                $.post(url + "?id=" + id + "fecha=" + fecha, function (response) {
+                    if(response.Status==="success")
+                    {
+                        $("#precioDolar").val(response.Dolar);
+                    }
+                    else
+                    {
+                        alert("Invalid respose");
+                    }
+                    });
+
+            });
+        });
+</script>*@
+
+
+
+
+
+    @*https://stackoverflow.com/questions/34502189/change-value-of-editorfor-on-dropdownfor-value-change*@
+}

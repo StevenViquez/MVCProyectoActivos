@@ -1,0 +1,116 @@
+﻿@model MVCProyectoActivos.ViewModel.ViewModelDepreciacion
+
+@{
+    ViewBag.Title = "FilterDepreciacionView";
+}
+
+<h2>FilterDepreciacionView</h2>
+
+
+
+@using (Ajax.BeginForm("DepreciacionByDate", "Depreciacion", null, new AjaxOptions
+{
+
+    HttpMethod = "GET",
+    OnBegin = "onBeginSubmit",
+    OnComplete = "onCompleteSubmit",
+    OnFailure = "onFailureResult",
+    OnSuccess = "onSuccessResult",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace
+}, new { id = "AjaxForm" }))
+{
+
+
+    <div class="form-group">
+        <h4>ViewModelDepreciacion</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ActivoID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaDepreciacion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaDepreciacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaDepreciacion, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Calcular" class="btn btn-default" />
+            </div>
+        </div>
+
+
+    </div>
+
+   
+
+    @*Muestra un resultado*@
+    <div id="resultado" />
+
+}
+
+ <div>
+        @Html.ActionLink("Ver todos los activos", "ListActivos")
+    </div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+
+    <!-- AL COMENZAR EL SUBMIT -->
+    <script>
+        var onBeginSubmit = function () {
+            // Mostramos el Ajax Loader
+            $("#AjaxLoader").show("slow");
+            console.log("Entro a JQuery")
+
+            // Deshabilitamos el botón de Submit
+            $("#SubmitBtn").prop("disabled", true);
+        };
+    </script>
+
+    <!-- AL FINALIZAR EL SUBMIT -->
+    <script>
+        var onCompleteSubmit = function () {
+
+        };
+    </script>
+
+    <!-- SE EJECUTA SI TODO FUE BIEN -->
+    <script>
+        var onSuccessResult = function (msg) {
+
+            // Escondemos el Ajax Loader
+            $("#AjaxLoader").hide("slow");
+
+            // Habilitamos el botón de Submit
+            $("#SubmitBtn").prop("disabled", false);
+
+            // Mostrar el mensaje
+            $("#ExitoAlert").show("slow").delay(1000).hide("slow");
+        };
+    </script>
+
+    <!-- SE EJECUTA SI SE PRODUJO UN ERROR -->
+    <script>
+        var onFailureResult = function (err) {
+            // Mostramos un mensaje de error.
+
+            $("#ErrorAlert").show("slow").delay(1000).hide("slow");
+
+            // Escondemos el Ajax Loader
+            $("#AjaxLoader").hide("slow");
+
+            // Habilitamos el botón de Submit
+            $("#SubmitBtn").prop("disabled", false);
+        };
+    </script>
+}
+
+

@@ -109,7 +109,7 @@
 
         @*FOTO DE FACTURA*@
         <div class="form-group">
-            @Html.LabelFor(model => model.FotoFactura, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FotoActivo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" name="ImageFile" required />
                 @*
@@ -120,7 +120,7 @@
 
         @*FOTO DE ACTIVO*@
         <div class="form-group">
-            @Html.LabelFor(model => model.FotoActivo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FotoFactura, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" name="ImageFile" required />
                 @*
@@ -165,13 +165,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.ValorActual, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ValorActual, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ValorActual, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.VidaUtil, htmlAttributes: new { @class = "control-label col-md-2" })

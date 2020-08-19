@@ -12,8 +12,9 @@ namespace Infrastructure.Repository
 {
     public class RepositoryActivos : IRepositoryActivos
     {
-        public void DeleteActivo(int id)
+        public void DeleteActivo(Activos activo)
         {
+            
             int returno;
             try
             {
@@ -21,11 +22,14 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    Activos tipoActivo = new Activos()
-                    {
-                        ActivoID = id
-                    };
-                    ctx.Entry(tipoActivo).State = EntityState.Deleted;
+                    //Activos Activo = new Activos()
+                    //{
+                    //    ActivoID = id
+                    //};
+
+
+
+                    ctx.Entry(activo).State = EntityState.Deleted;
                     returno = ctx.SaveChanges();
                 }
             }

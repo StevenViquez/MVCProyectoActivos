@@ -10,10 +10,10 @@ namespace ApplicationCore.Services
 {
     public class ServiceActivos : IServiceActivos
     {
-        public void DeleteActivo(int id)
+        public void DeleteActivo(Activos activo)
         {
             IRepositoryActivos repository = new RepositoryActivos();
-            repository.DeleteActivo(id);
+            repository.DeleteActivo(activo);
         }
 
         public IEnumerable<Activos> GetActivos()

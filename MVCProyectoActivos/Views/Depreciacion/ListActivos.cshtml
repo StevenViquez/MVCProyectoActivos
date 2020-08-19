@@ -1,0 +1,227 @@
+﻿@model IEnumerable<Infrastructure.Models.Activos>
+
+@{
+    ViewBag.Title = "List";
+}
+
+    <h2>Depreciación por Activo</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaVencimientoSeguro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaVencimientoGarantia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostoColones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostoDolares)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CondicionActivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FotoActivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorActual)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumeroSerie)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Modelo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaVencimientoSeguro)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaVencimientoGarantia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CostoColones)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CostoDolares)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CondicionActivo)
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.FotoActivo)*@
+
+        <div class="col-md-10">
+            <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.FotoActivo)" id="ImagenProducto" style="height:75px;width:75px">
+        </div>
+
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ValorActual)
+    </td>
+    <td>
+        @*@Html.ActionLink("Ver depreciación", "ListDepreciacion", new { idActivo = item.ActivoID })*@
+
+        <a onclick="modalDetail(@item.ActivoID)" href="#">Ver todas las depreciaciones</a><br>
+    </td>
+    
+    <td>
+        @Html.ActionLink("Buscar depreciación por fecha", "FilterDepreciacionView", new { idActivo = item.ActivoID })
+
+    </td>
+</tr>
+    }
+
+</table>
+
+
+<input type="hidden" id="campoOculto" />
+
+<!-- Modal -->
+<!--Las ventanas modas estan ocultas en el código son activadas por Javascript/JQuery-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog vertical-align-center" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Depreciacion</h4>
+            </div>
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <p>Filtrar depreciacion por fecha: <input class="form-control text-box single-line" type="date" id="datepicker"></p>
+            </div>
+
+            <div class="modal-body" onload='myFunc()'>
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("text/javascript")
+
+
+
+
+    <script>
+        function modalDetail(p) {
+
+            // Almacena el Id del estudiante en el hidden field tipo variable global
+            $("#campoOculto").val(p);
+            // $("#myModal").val(p);
+            //var temp = $("#campoOculto").val();
+            // Invoca al Div de Modal de una vez se invoca el evento shown.bs.modal
+            // donde se invoca al Ajax con el Partial View
+            $("#myModal").modal();
+        }
+    </script>
+
+
+
+    <script>
+
+
+        // Este evento se ejecuta antes después de invocar  $("#myModal").modal();
+        // acá es donde se invoca por Ajax al Controller y este devuelve Partial View
+        $('#myModal').on('shown.bs.modal', function () {
+            // permite mover
+            $('.modal-dialog').draggable();
+            // Se lee el campo oculto
+            var identificacionEstudiante = $("#campoOculto").val();
+            //var identificacionEstudiante = $("#myModal").val();
+            console.log(identificacionEstudiante);
+            $.ajax({
+                type: "GET",
+                url: "/Depreciacion/ListDepreciacion/",
+                // parametro por JSON
+                data: { id: identificacionEstudiante },
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $(".modal-body").html(data);
+
+                },
+                // Capturar errores y mostrar un mensaje de error
+                error: function (xhr, status, error) {
+                    var mensaje = "<div class='alert alert-danger' role='alert'> Result: " +
+                        status + " " + error + " " + xhr.status + " " + xhr.statusText + "</div>";
+                    //debugger;
+                    $("#mensaje").html(mensaje).show("slow").delay(1000).hide("slow");
+                }
+            });
+
+        })
+
+        // Se ejecuta cuando se destruye el modal
+        $("#myModal").on('hide.bs.modal', function () {
+            // Se limpia el Div para no dejar
+            $(".modal-body").html("...");
+            //Se limpia la fecha
+            $('#datepicker').val("");
+        });
+
+    </script>
+
+    @*<script>
+
+        $(document).ready(function () {
+            $('#datepicker').change(function () {
+                var fecha = $('#datepicker').val();
+
+                alert('@TempData["IdActivo"]')
+
+                debugger
+
+                var id = '@TempData["IdActivo"]';
+
+
+                console.log(fecha);
+
+                console.log(id);
+
+                var url = "@Url.Action("DepreciacionByDate", "Depreciacion")";
+                $.post(url + "?id=" + id + "fecha=" + fecha, function (response) {
+                    if(response.Status==="success")
+                    {
+                        $("#precioDolar").val(response.Dolar);
+                    }
+                    else
+                    {
+                        alert("Invalid respose");
+                    }
+                    });
+
+            });
+        });
+
+    </script>*@
+
+}
+
+@*jquery: Get value from input in modal Bootstrap 4.0
+    https://www.youtube.com/watch?v=8zTL1LMxBqc*@
+
