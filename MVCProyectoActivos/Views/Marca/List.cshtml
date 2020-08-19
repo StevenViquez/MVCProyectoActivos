@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<Infrastructure.Models.Marca>
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Lista de Marcas";
 }
 
-<h2>List</h2>
+<h2>Lista de Marcas</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Agregar nueva Marca", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.MarcaID)
@@ -19,20 +19,22 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.MarcaID)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Descripcion)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.MarcaID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.MarcaID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.MarcaID })
-    </td>
-</tr>
-}
+    @foreach (var item in Model) { 
+<tbody>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MarcaID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.MarcaID }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.MarcaID }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.MarcaID }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+</tbody>
+        }
 
-</table>
+    </table>

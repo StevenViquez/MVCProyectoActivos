@@ -1,13 +1,12 @@
 ﻿@model Infrastructure.Models.Marca
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles de Marca";
 }
 
-<h2>Details</h2>
+<h2>Detalles de Marca</h2>
 
 <div>
-    <h4>Marca</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,6 +26,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MarcaID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar Marca", "Edit", new { id = Model.MarcaID }, new { @class = "btn btn-success" }) |
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-danger" })
 </p>

@@ -1,10 +1,10 @@
 ﻿@model Infrastructure.Models.Activos
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear";
 }
 
-<h2>Create</h2>
+<h2>Agregar Activo</h2>
 
 
 @*@using (Html.BeginForm("Save", "Activo", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -22,7 +22,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Activos</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -183,23 +182,23 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn  btn-success" data-toggle="tooltip" data-placement="top" title="Save" />
+                <input type="submit" value="Crear" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Save" />
 
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="button" id="btnEvent" value="test" />
 
             </div>
-        </div>
+        </div>*@
 
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regregar", "Index", null, new { @class = "btn btn-danger" })
 </div>
 
 @section Scripts {

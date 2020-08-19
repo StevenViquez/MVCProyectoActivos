@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top ">
+    <div class="navbar navbar-expand-sm bg-warning navbar-dark navbar-fixed-top">
         <div class="container">
             <div class="navbar-header ">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -55,11 +55,11 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Listado de Activos", "x", "x")</li>
+                            <li>@Html.ActionLink("Listado de Activos", "ActivosCatalogo", "Reporte")</li>
                             <li class="nav-divider"></li>
                             <li>@Html.ActionLink("Consulta de Activo", "x", "x")</li>
                             <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Vencimiento de Garantías", "x", "x")</li>
+                            <li>@Html.ActionLink("Vencimiento de Garantías", "ListActivos", "Reporte")</li>
                             <li class="nav-divider"></li>
                             <li>@Html.ActionLink("Tipo de Activos", "x", "x")</li>
                             <li class="nav-divider"></li>
@@ -123,8 +123,8 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year -Desarrollado para fines Educativos.  </p>
-            <p> MRT. Anthony Morera V</p>
+            <p>&copy; @DateTime.Now.Year - Proyecto Steven Viquez Benavides.</p>
+            <p>Profesor: MRT. Anthony Morera V</p>
             @*<p>Version @typeof(Web.MvcApplication).Assembly.GetName().Version.ToString()</p>*@
 
         </footer>

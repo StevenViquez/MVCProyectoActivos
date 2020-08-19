@@ -1,13 +1,12 @@
 ﻿@model Infrastructure.Models.Vendedor
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
 
-<h2>Details</h2>
+<h2>Detailes de Vendedor</h2>
 
 <div>
-    <h4>Vendedor</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -45,6 +44,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VendedorID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.VendedorID }, new { @class = "btn btn-success" }) |
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-danger" })
 </p>

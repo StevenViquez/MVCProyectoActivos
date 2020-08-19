@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<Infrastructure.Models.Activos>
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Lista de Activos";
 }
 
-<h2>List</h2>
+<h2>Lista de Activos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Agregar nuevo Activo", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.NumeroSerie)
@@ -40,7 +40,9 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
+<tbody>
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.NumeroSerie)
@@ -75,11 +77,12 @@
             @Html.DisplayFor(modelItem => item.ValorActual)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ActivoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ActivoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ActivoID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ActivoID }, new { @class = "btn btn-success" }) 
+            @Html.ActionLink("Details", "Details", new { id = item.ActivoID }, new { @class = "btn btn-info" }) 
+            @Html.ActionLink("Delete", "Delete", new { id = item.ActivoID }, new { @class = "btn btn-danger" })
         </td>
     </tr>
-}
+</tbody>
+            }
 
-</table>
+    </table>

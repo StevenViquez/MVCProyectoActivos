@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<Infrastructure.Models.Vendedor>
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Lista de Vendedores";
 }
 
-<h2>List</h2>
+    <h2>Lista de Vendedores</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Agregar nuevo Vendedor", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.CedulaJuridica)
@@ -31,31 +31,33 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CedulaJuridica)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CorreoElectronico)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreContacto)
-            </td>
-            <td>
-                <a onclick="modalDetail(@item.VendedorID)" href="#">Telefono(s)</a>
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.VendedorID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.VendedorID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.VendedorID })
-            </td>
-        </tr>
-    }
+<tbody>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CedulaJuridica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorreoElectronico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreContacto)
+        </td>
+        <td>
+            <a onclick="modalDetail(@item.VendedorID)" href="#" class = "btn btn-success">Ver Telefono(s)</a>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.VendedorID }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.VendedorID }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.VendedorID }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+</tbody>
+            }
 
-</table>
+    </table>
 
 
 <input type="hidden" id="campoOculto"/>

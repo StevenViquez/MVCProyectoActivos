@@ -1,13 +1,12 @@
 ﻿@model Infrastructure.Models.TipoActivo
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles Tipo de Activo";
 }
 
-<h2>Details</h2>
+    <h2>Detalles Tipo de Activo</h2>
 
 <div>
-    <h4>TipoActivo</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,6 +26,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TipoActivoID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.TipoActivoID }, new { @class = "btn btn-success" }) |
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-danger" })
 </p>

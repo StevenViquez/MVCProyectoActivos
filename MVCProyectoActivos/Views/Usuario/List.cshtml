@@ -4,21 +4,18 @@
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
+<h2>Lista de Usuarios</h2>
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Apellidos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Estado)
@@ -31,42 +28,43 @@
 
 
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Nombre)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Apellidos)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Password)
-    </td>
+    @foreach (var item in Model)
+    {
+<tbody>
 
-    @{
-        string estado = "";
-        if (item.Estado.Equals("1"))
-        {
-            estado = "ACTIVO";
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellidos)
+        </td>
+
+        @{
+            string estado = "";
+            if (item.Estado.Equals("1"))
+            {
+                estado = "ACTIVO";
+            }
+            else
+            {
+                estado = "INACTIVO";
+            }
         }
-        else
-        {
-            estado = "INACTIVO";
-        }
-    }
 
-    <td>
-        @Html.DisplayFor(modelItem => estado)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Rol.Descripcion)
-    </td>
-    @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Login }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Login }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Login })
-        </td>*@
-</tr>
-}
+        <td>
+            @Html.DisplayFor(modelItem => estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rol.Descripcion)
+        </td>
+        @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Login }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Login }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Login })
+            </td>*@
+    </tr>
+</tbody>
+            }
 
-</table>
+    </table>

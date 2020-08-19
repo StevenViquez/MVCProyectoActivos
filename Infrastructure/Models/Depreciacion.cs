@@ -11,7 +11,9 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(DepreciacionMetadata))]
     public partial class Depreciacion
     {
         public int DepreciacionID { get; set; }

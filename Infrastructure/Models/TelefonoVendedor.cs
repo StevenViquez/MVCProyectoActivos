@@ -11,7 +11,9 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(TelefonoVendedorMetadata))]
     public partial class TelefonoVendedor
     {
         public int TelefonoID { get; set; }
