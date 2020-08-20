@@ -31,55 +31,44 @@ namespace ApplicationCore.Services
             RepositoryActivos repositoryActivo = new RepositoryActivos();
             Activos oActivo = repositoryActivo.GetActivoByID(activo);
             Depreciacion oDepreciacion = new Depreciacion();
-            
+            int valorDepreciacion = 0;
 
             ////Averiguando los meses que han pasado desde la compra al dia de hoy cuando lo guardamos en el sistema
             ///Recibimos date como parametro
-
-
             lista = repository.GetDepreciacionByActivo(activo).ToList();
 
             foreach (var item in lista)
             {
-                //Validar que la fecha ingresada sea mayor que la fecha de compra
-                if (date > item.Activos.FechaCompra) { 
-                        int valorDepreciacion = 0;
-
-                    if ( ((item.Fecha.Month) != (date.Month)) || ((item.Fecha.Year) != (date.Year)))
+                    if (((item.Fecha.Month) == (date.Month)) && ((item.Fecha.Year) == (date.Year))) // si el mes es diferente
                     {
-                        //add new "depreciacion"
-                        diferenciaMeses = (date.Month - oActivo.FechaCompra.Month) + 12 * (DateTime.Now.Year - oActivo.FechaCompra.Year);
-
-                        ////Sacando depreciacion por mes ==> Multiplicando depreciacion por los meses actuales para saber el valor actual 
-                        ////Debo cambiar el valor en la base de datos a decimal!!!!
-                        ////(activos.CostoColones / (activos.VidaUtil * 12) ===> Averiguamos cuanto se gasta por mes * la difernecia de meses
-                        //// Le restamos el costo total a el valor actual ==> activos.CostoColones(necesito cambiar ValorActual a decimal en la DB)
-                    
-                        valorDepreciacion = Convert.ToInt32(oActivo.CostoColones - ((oActivo.CostoColones / (oActivo.VidaUtil * 12) * diferenciaMeses)));
-                        oDepreciacion.Valor = valorDepreciacion.ToString();
-                        oDepreciacion.Activo = item.Activo;
-                        oDepreciacion.Fecha = date;
-
-                        return oDepreciacion = repository.SaveTransaccion(oDepreciacion);
-
+                            //return item
+                            return item;
                     }
-                    else
-                    {
-                        //return item
-                        return item;
-                    }
-                }
-                else
-                {
-                    return oDepreciacion;
-                }
             }
 
-            return oDepreciacion;
+
+            //Calculando la diferencia de meses
+            diferenciaMeses = (date.Month - oActivo.FechaCompra.Month) + 12 * (date.Year - oActivo.FechaCompra.Year);
+
+
+            ////Calculando depreciacion por mes ==> Multiplicando depreciacion por los meses actuales para saber el valor actual 
+            ////Debo cambiar el valor en la base de datos a decimal!!!!
+            ////(activos.CostoColones / (activos.VidaUtil * 12) ===> Averiguamos cuanto se gasta por mes * la difernecia de meses
+            //// Le restamos el costo total a el valor actual ==> activos.CostoColones(necesito cambiar ValorActual a decimal en la DB)
+            valorDepreciacion = Convert.ToInt32(oActivo.CostoColones - ((oActivo.CostoColones / (oActivo.VidaUtil * 12) * diferenciaMeses)));
+
+
+            oDepreciacion.Valor = valorDepreciacion.ToString();
+            oDepreciacion.Activo = oActivo.ActivoID;
+            oDepreciacion.Fecha = date;
+
+            return oDepreciacion = repository.SaveTransaccion(oDepreciacion);
+
+
         }
 
 
-        public IEnumerable<Depreciacion> GetDepreciacionByID(int id) 
+        public IEnumerable<Depreciacion> GetDepreciacionByID(int id)
         {
             IRepositoryDepreciacion repository = new RepositoryDepreciacion();
 

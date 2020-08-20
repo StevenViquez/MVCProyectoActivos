@@ -27,14 +27,17 @@ namespace Infrastructure.Models
 
         [DataType(DataType.Date)]
         [Display(Name = "Fecha de compra")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime FechaCompra { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Expiración de seguro")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime FechaVencimientoSeguro { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Expiración de garantía")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime FechaVencimientoGarantia { get; set; }
 
         [Display(Name = "Costo en Colón CR")]
@@ -218,7 +221,6 @@ namespace Infrastructure.Models
     internal partial class VendedorMetadata
     {
         [Display(Name = "Código")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Código requerido")]
         public int VendedorID { get; set; }
 
         [Display(Name = "Cédula jurídica")]
@@ -231,7 +233,6 @@ namespace Infrastructure.Models
 
         [Display(Name = "Correo electrónico")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Correo electrónico requerido")]
-        [DataType(DataType.EmailAddress)]
         public string CorreoElectronico { get; set; }
 
         [Display(Name = "Nombre de contacto")]

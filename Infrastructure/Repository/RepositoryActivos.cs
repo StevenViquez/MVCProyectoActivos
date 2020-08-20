@@ -194,7 +194,8 @@ namespace Infrastructure.Repository
             {
                 //Transaction Begin statement
                 using (DbContextTransaction transaccion = ctx.Database.BeginTransaction())
-                { 
+                {
+                    int indicador = 0; // variable creada [ara saber cuando un activo se esta editando
 
                     try
                     {
@@ -207,24 +208,12 @@ namespace Infrastructure.Repository
                         else
                         {
                             ctx.Entry(activo).State = EntityState.Modified;
+                            indicador = 1;
                         }
                         retorno = ctx.SaveChanges();
 
 
-#if !DEBUG
-                   // Error por exception
-                    int x = 0;
-                    x = 25 / x; 
-
-                    // Error por Entity Framework 
-                    // Forzar un error por duplicidad
-                   // bodega.IdBodega = 1;
-                   // ctx.Bodega.Add(bodega);
-                   // retorno = ctx.SaveChanges();
-#endif
-
-
-                        if (retorno >= 0) 
+                        if ((retorno >= 0) && (indicador == 0)) 
                         { 
                             //oActivo = GetActivoByID(activo.ActivoID);
 
@@ -242,7 +231,6 @@ namespace Infrastructure.Repository
                         if (retorno >= 0)//Se insertan llena la tabla Activos y depreciacion en la DB
                         {
                             transaccion.Commit();
-
                         }
 
                         return oActivo;
